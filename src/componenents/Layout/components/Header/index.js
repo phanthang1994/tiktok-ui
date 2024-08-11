@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
 import images from "~/assets/images";
@@ -12,7 +12,7 @@ import {
   faCircleXmark,
   faEllipsisVertical,
   faKeyboard,
-  faLanguage,
+  faEarthAsia,
   faMagnifyingGlass,
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
@@ -22,8 +22,20 @@ import Menu from "~/componenents/Popper/Menu";
 const cx = classNames.bind(styles);
 const MENU_ITEMS = [
   {
-    icon: <FontAwesomeIcon icon={faLanguage} />,
-    title: "Tiếng Việt",
+    icon: <FontAwesomeIcon icon={faEarthAsia} />,
+    title: "English",
+    children: {
+      data: [
+        {
+          code: "en",
+          title: "English",
+        },
+        {
+          code: "vi",
+          title: "Tiếng Việt",
+        },
+      ],
+    },
   },
   {
     icon: <FontAwesomeIcon icon={faCircleQuestion} />,
@@ -37,14 +49,19 @@ const MENU_ITEMS = [
 ];
 function Header() {
   const [searchResult, setSearchResult] = useState([]);
-  setTimeout(() => {
-    setSearchResult(() => {
-      return [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-      ];
-    });
-  }, 0);
-
+  useEffect(() => {
+    setTimeout(() => {
+      setSearchResult(() => {
+        return [
+          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+        ];
+      });
+    }, 0);
+  })
+  // Handle logic  
+const handleMenuChange = (menuItem) => {  
+  console.log(menuItem);  
+}
   return (
     <header className={cx("wrapper")}>
       <div className={cx("inner")}>
@@ -86,8 +103,8 @@ function Header() {
         <div className={cx("actions")}>
           <Button text>Upload</Button>
           <Button primary>Log in</Button>
-          <Menu items={MENU_ITEMS}>
-            <button className={cx("more-btn")}>
+          <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
+            <button className={cx("more-btn")} >
               <FontAwesomeIcon icon={faEllipsisVertical} />
             </button>
           </Menu>
