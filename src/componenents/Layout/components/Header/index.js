@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
 import images from "~/assets/images";
-import Tippy from "@tippyjs/react/headless";
+
+import HeadlessTippy from "@tippyjs/react/headless";
+import Tippy from "@tippyjs/react";
 import { Wrapper as PopperWreapper } from "~/componenents/Popper";
 // import Tippy from '@tippyjs/react';
 // import 'tippy.js/dist/tippy.css'; // optional
@@ -15,6 +17,8 @@ import {
   faEarthAsia,
   faMagnifyingGlass,
   faSpinner,
+  faCloudUpload,
+  faMessage,
 } from "@fortawesome/free-solid-svg-icons";
 import AccountItem from "~/componenents/Accountitem";
 import Button from "~/componenents/Button";
@@ -57,18 +61,19 @@ function Header() {
         ];
       });
     }, 0);
-  })
-  // Handle logic  
-const handleMenuChange = (menuItem) => {  
-  console.log(menuItem);  
-}
+  });
+  // Handle logic
+  const handleMenuChange = (menuItem) => {
+    console.log(menuItem);
+  };
+  const currentUser = true;
   return (
     <header className={cx("wrapper")}>
       <div className={cx("inner")}>
         <div className={cx("logo")}>
           <img src={images.logo} alt="Tiktok" />
         </div>
-        <Tippy
+        <HeadlessTippy
           interactive={true}
           visible={searchResult.length > 0}
           render={(attrs) => (
@@ -98,17 +103,36 @@ const handleMenuChange = (menuItem) => {
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
           </div>
-        </Tippy>
+        </HeadlessTippy>
 
         <div className={cx("actions")}>
-          <Button text>Upload</Button>
-          <Button primary>Log in</Button>
+          {currentUser ? (
+            <>
+             <Tippy delay={[0, 200]} content="Upload video">
+                <button className={cx("action-btn")}>
+                  <FontAwesomeIcon icon={faCloudUpload} />
+                </button>
+             </Tippy>
+              {/* <button className={cx("action-btn")}>
+                <FontAwesomeIcon icon={faMessage} />
+              </button>  */}
+            </>
+          ) : (
+            <>
+              <Button text="Upload" />
+
+              <Button primary>Log in</Button>
+            </>
+          )}
           <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
-            <button className={cx("more-btn")} >
-              <FontAwesomeIcon icon={faEllipsisVertical} />
-            </button>
+            {currentUser ? (
+              <img className={cx("user-avatar")} alt="Nguyen Van" src="https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/e75a19561fc093ba78a6d43ec0de1128.webp?lk3s=a5d48078&nonce=16270&refresh_token=06621c9fa560b5c4087e7ebc51195269&x-expires=1723561200&x-signature=MnCvENesUepn7%2FuTinfRYK4n1lY%3D&shp=a5d48078&shcp=fdd36af4"/>
+            ) : (
+              <button className={cx("more-btn")}>
+                <FontAwesomeIcon icon={faEllipsisVertical} />
+              </button>
+            )}
           </Menu>
-          {/* <Button   rouned>Get App</Button> */}
         </div>
       </div>
     </header>

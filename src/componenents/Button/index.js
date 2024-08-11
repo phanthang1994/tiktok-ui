@@ -42,7 +42,7 @@ function Button({
     [className]: className,
   });
   if (to) {
-    props.href = to;
+    props.to = to;
     Comp = Link;
   } else if (href) {
     props.href = href;

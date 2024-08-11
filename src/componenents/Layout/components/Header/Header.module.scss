@@ -99,7 +99,10 @@ background-color: rgba(22, 24, 35, 0.03);
     font-weight: 600;  
     color: rgba(22, 24, 35, 0.5);
 }
-
+.action{
+    display: flex;
+    align-items: center;
+}
 .more-btn{
     font-style: 2rem;
     margin-left: 28px;
@@ -108,3 +111,10 @@ background-color: rgba(22, 24, 35, 0.03);
     padding: 4px 8px;
 }
 
+.action-btn {  
+    font-size: 2.2rem;  
+    color: #161823;  
+    background-color: transparent;  
+    padding: 4px 12px;
+    cursor: pointer;  
+  }
