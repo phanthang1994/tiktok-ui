@@ -28,6 +28,7 @@ import {
 import AccountItem from "~/componenents/Accountitem";
 import Button from "~/componenents/Button";
 import Menu from "~/componenents/Popper/Menu";
+import Image from "~/componenents/Image";
 const cx = classNames.bind(styles);
 const MENU_ITEMS = [
   {
@@ -101,7 +102,7 @@ function Header() {
     <header className={cx("wrapper")}>
       <div className={cx("inner")}>
         <div className={cx("logo")}>
-          <img src={images.logo} alt="Tiktok" />
+          <Image src={images.logo} alt="Tiktok" />
         </div>
         <HeadlessTippy
           interactive={true}
@@ -156,7 +157,7 @@ function Header() {
           )}
           <Menu items={userMenu} onChange={handleMenuChange}>
             {currentUser ? (
-              <img className={cx("user-avatar")} alt="Nguyen Van" src="https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/e75a19561fc093ba78a6d43ec0de1128.webp?lk3s=a5d48078&nonce=16270&refresh_token=06621c9fa560b5c4087e7ebc51195269&x-expires=1723561200&x-signature=MnCvENesUepn7%2FuTinfRYK4n1lY%3D&shp=a5d48078&shcp=fdd36af4"/>
+              <Image className={cx("user-avatar")} alt="Nguyen Van" src="https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/e75a19561fc093ba78a6d43ec0de1128.webp?lk3s=a5d48078&nonce=16270&refresh_token=06621c9fa560b5c4087e7ebc51195269&x-expires=1723561200&x-signature=MnCvENesUepn7%2FuTinfRYK4n1lY%3D&shp=a5d48078&shcp=fdd36af4"/>
             ) : (
               <button className={cx("more-btn")}>
                 <FontAwesomeIcon icon={faEllipsisVertical} />

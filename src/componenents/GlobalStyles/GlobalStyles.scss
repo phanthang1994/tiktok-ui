@@ -81,3 +81,28 @@ body {
       top: -8px;  
     }  
   }
+
+// Fonts emmited by GlobalStyles
+@font-face {  
+    font-family: ProximaNova;  
+    src: url('/assets/fonts/Proxima-Nova-Regular.woff2');  
+    font-weight: 400;  
+  }  
+  
+  @font-face {  
+    font-family: ProximaNova;  
+    src: url('/assets/fonts/Proxima-Nova-Semibold.woff2');  
+    font-weight: 600;  
+  }  
+  
+  @font-face {  
+    font-family: ProximaNova;  
+    src: url('/assets/fonts/ProximaNova-Bold.woff2');  
+    font-weight: 700;  
+  }  
+  
+  @font-face {  
+    font-family: SofiaPro;  
+    src: url('/assets/fonts/sofiapro-bold.woff');  
+    font-weight: 700;  
+  }
