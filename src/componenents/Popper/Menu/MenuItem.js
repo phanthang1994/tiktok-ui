@@ -6,8 +6,9 @@ const cx = classNames.bind({
 });
 function MenuItem({data, onClick}) {
     // console.log(data);
+    const classes = cx("menu-item", { separate: data.separate });
     return <Button 
-    className={cx("menu-item")} 
+    className={classes} 
     leftIcon={data.icon}
      to={data.to} 
      onClick={onClick}

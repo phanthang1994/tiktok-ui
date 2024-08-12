@@ -9,6 +9,7 @@ import { Wrapper as PopperWreapper } from "~/componenents/Popper";
 // import Tippy from '@tippyjs/react';
 // import 'tippy.js/dist/tippy.css'; // optional
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import 'tippy.js/dist/tippy.css'; // optional
 import {
   faCircleQuestion,
   faCircleXmark,
@@ -19,6 +20,10 @@ import {
   faSpinner,
   faCloudUpload,
   faMessage,
+  faUser,
+  faCoins,
+  faGear,
+  faSignOut,
 } from "@fortawesome/free-solid-svg-icons";
 import AccountItem from "~/componenents/Accountitem";
 import Button from "~/componenents/Button";
@@ -67,6 +72,31 @@ function Header() {
     console.log(menuItem);
   };
   const currentUser = true;
+
+  const userMenu = [  
+    {  
+      icon: <FontAwesomeIcon icon={faUser} />,  
+      title: 'View profile',  
+      to: '/@hoa'  
+    },  
+    {  
+      icon: <FontAwesomeIcon icon={faCoins} />,  
+      title: 'Get coins',  
+      to: '/coin'  
+    },  
+    {  
+      icon: <FontAwesomeIcon icon={faGear} />,  
+      title: 'Settings',  
+      to: '/settings'  
+    },  
+    ...MENU_ITEMS,  
+    {  
+      icon: <FontAwesomeIcon icon={faSignOut} />,  
+      title: 'Log out',  
+      to: '/logout'  ,
+      separate: true
+    }  
+  ];
   return (
     <header className={cx("wrapper")}>
       <div className={cx("inner")}>
@@ -124,7 +154,7 @@ function Header() {
               <Button primary>Log in</Button>
             </>
           )}
-          <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
+          <Menu items={userMenu} onChange={handleMenuChange}>
             {currentUser ? (
               <img className={cx("user-avatar")} alt="Nguyen Van" src="https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/e75a19561fc093ba78a6d43ec0de1128.webp?lk3s=a5d48078&nonce=16270&refresh_token=06621c9fa560b5c4087e7ebc51195269&x-expires=1723561200&x-signature=MnCvENesUepn7%2FuTinfRYK4n1lY%3D&shp=a5d48078&shcp=fdd36af4"/>
             ) : (

@@ -18,6 +18,7 @@ function Menu({ children, items = [], onChange = () => {} }) {
 
       return (
         <MenuItem
+        
           key={index}
           data={item}
           onClick={() => {
@@ -42,6 +43,7 @@ function Menu({ children, items = [], onChange = () => {} }) {
       // visible
       interactive
       delay={[0, 700]}
+      offset={[12, 8]}
       placement="bottom-end"
       render={(attrs) => (
         <div className={cx("menu-list")} tabIndex="-1" {...attrs}>
