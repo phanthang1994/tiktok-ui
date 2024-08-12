@@ -157,7 +157,7 @@ function Header() {
           )}
           <Menu items={userMenu} onChange={handleMenuChange}>
             {currentUser ? (
-              <Image className={cx("user-avatar")} alt="Nguyen Van" src="https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/e75a19561fc093ba78a6d43ec0de1128.webp?lk3s=a5d48078&nonce=16270&refresh_token=06621c9fa560b5c4087e7ebc51195269&x-expires=1723561200&x-signature=MnCvENesUepn7%2FuTinfRYK4n1lY%3D&shp=a5d48078&shcp=fdd36af4"/>
+              <Image fallback="https://fullstack.edu.vn/assets/f8-icon-lV2rGpF0.png" className={cx("user-avatar")} alt="Nguyen Van" src="https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/e75a19561fc093ba78a6d43ec0de1128.webp?lk3s=a5d48078&nonce=16270&refresh_token=06621c9fa560b5c4087e7ebc51195269&x-expires=1723561200&x-signature=MnCvENesUepn7%2FuTinfRYK4n1lY%3D&shp=a5d48078&shcp=fdd36af4"/>
             ) : (
               <button className={cx("more-btn")}>
                 <FontAwesomeIcon icon={faEllipsisVertical} />
