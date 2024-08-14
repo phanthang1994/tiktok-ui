@@ -14,6 +14,8 @@ import {
 import AccountItem from "~/componenents/Accountitem";
 import { useDebounce } from "~/hook";
 
+import * as searchServices from "~/apiServices/searchServices.js";
+
 const cx = classNames.bind(styles);
 function Search() {
     const inputRef = useRef()
@@ -22,19 +24,30 @@ function Search() {
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
     const debounced = useDebounce(searchValue, 500);
-   
+
     useEffect(() => {
-        if(!debounced.trim())
-            {
-                setSearchResult([]);
-                return;
-            }
-        setLoading(true);
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
-        .then(res => res.json())
-        .then(data => {setLoading(false);setSearchResult(data.data)})
+        if (!debounced.trim()) {
+            setSearchResult([]);
+            return;
+        }
+     
+
+       try {
+        (async () => {
+            setLoading(true);
+            const result = await searchServices.search(encodeURIComponent(debounced));
+            setSearchResult(result);
+            setLoading(false);
+        })();
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+        }
+        finally {  setLoading(false); }
         
-    },[debounced]);
+    }
+
+    , [debounced]);
     const handleHideResult = (tf) => {
         setShowResult(tf);
     }
@@ -46,14 +59,14 @@ function Search() {
     };
     return (
         <HeadlessTippy
-            onClickOutside={() => handleHideResult(false)}  
+            onClickOutside={() => handleHideResult(false)}
             interactive={true}
             visible={searchResult.length > 0 && showResult}
             render={(attrs) => (
                 <div className={cx("search-result")} tabIndex="-1" {...attrs}>
                     <PopperWreapper>
                         <h4 className={cx("search-title")}>Accounts</h4>
-                       { searchResult.map((result) => (
+                        {searchResult.map((result) => (
                             <AccountItem
                                 key={result.id}
                                 data={result}
@@ -72,7 +85,7 @@ function Search() {
                     placeholder="Search accounts and videos"
                     spellCheck={false}
                     onChange={(e) => setSearchValue(e.target.value)}
-                    onFocus={()=>handleHideResult(true)}
+                    onFocus={() => handleHideResult(true)}
                 />
                 {!!searchValue && !loading && (
                     <button className={cx("clear")} onClick={handleClear}>
@@ -80,11 +93,11 @@ function Search() {
                     </button>
                 )}
 
-                { loading &&  <FontAwesomeIcon className={cx("loading")} icon={faSpinner} /> }
+                {loading && <FontAwesomeIcon className={cx("loading")} icon={faSpinner} />}
 
                 <button className={cx("search-btn")}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button> 
+                </button>
             </div>
         </HeadlessTippy>
     );
