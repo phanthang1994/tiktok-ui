@@ -12,6 +12,7 @@ import {
     faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 import AccountItem from "~/componenents/Accountitem";
+import { useDebounce } from "~/hook";
 
 const cx = classNames.bind(styles);
 function Search() {
@@ -20,19 +21,20 @@ function Search() {
     const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
+    const debounced = useDebounce(searchValue, 500);
    
     useEffect(() => {
-        if(!searchValue.trim())
+        if(!debounced.trim())
             {
                 setSearchResult([]);
                 return;
             }
         setLoading(true);
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
         .then(res => res.json())
         .then(data => {setLoading(false);setSearchResult(data.data)})
         
-    },[searchValue]);
+    },[debounced]);
     const handleHideResult = (tf) => {
         setShowResult(tf);
     }
