@@ -1,19 +1,15 @@
-import * as request from "~/utils/request";
-export const search = async (q, type = 'less') => {
+import * as request from '~/utils/request';
 
+export const search = async (q, type = 'less') => {
     try {
-        const response = await request.get(`users/search`, {
+        const res = await request.get('users/search', {
             params: {
                 q,
-                type
-            }
-        }
-
-        )
-    
-       return response.data
-
+                type,
+            },
+        });
+        return res.data;
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
-}
+};
