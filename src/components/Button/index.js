@@ -75,7 +75,8 @@ Button.propTypes = {
     large: PropTypes.bool,
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
-    leftIcon: PropTypes.string,
-    onClick: PropTypes.string,
+    leftIcon: PropTypes.node,
+    rightIcon: PropTypes.node,
+    onClick: PropTypes.func,
 }
 export default Button;
