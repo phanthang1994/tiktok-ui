@@ -66,7 +66,6 @@ export const SearchIcon = ({ width = '2.4rem', height = '2.4rem', className }) =
     </svg>
 );
 
-
 export const HomeIcon = ({ width = '3.2rem', height = '3.2rem', className }) => (
     <svg
         className={className}
